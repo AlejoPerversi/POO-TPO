@@ -6,17 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import org.w3c.dom.events.MouseEvent;
-
-import com.grupo.tpo_poo.producto.Producto;
 import com.grupo.tpo_poo.ui.components.Button;
 import com.grupo.tpo_poo.ui.components.Label;
 import com.grupo.tpo_poo.ui.components.TableModelVentas;
@@ -28,24 +22,20 @@ public class PanelVentas extends JPanel implements ActionListener {
     Label labelProducto;
     Label labelCantidad;
     Label labelMedioPago;
-
     TextField textCodigo;
-    JComboBox comboBoxProducto;
+    JComboBox<String> comboBoxProducto;
     TextField textCantidad;
-    JComboBox comboBoxMedioPago;
+    JComboBox<String> comboBoxMedioPago;
     Label labelCuotas;
-    JComboBox comboBoxCuotas;
-
+    JComboBox<Integer> comboBoxCuotas;
     JPanel leftPanel;
     JPanel topLeftPannel;
     JPanel bottomLeftPanel;
-
     JScrollPane scrollPane;
     Button buttonAdd;
     Button buttonRemove;
-
-    JTable tableVentas;
     TableModelVentas modelVentas;
+    public static JTable tableVentas;
     
     public PanelVentas() {
         this.setLayout(new GridLayout(1, 2));
@@ -58,7 +48,7 @@ public class PanelVentas extends JPanel implements ActionListener {
         labelCodigo = new Label("Id Venta:");
         textCodigo = new TextField();
         labelProducto = new Label("Producto:");
-        comboBoxProducto = new JComboBox<Producto>();
+        comboBoxProducto = new JComboBox<String>();
         comboBoxProducto.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {

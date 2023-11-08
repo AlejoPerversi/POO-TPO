@@ -1,12 +1,12 @@
 package com.grupo.tpo_poo.ui.components;
 
 import javax.swing.JTextField;
-import com.grupo.tpo_poo.util.FontLoader;
+import java.awt.Font;
 
 public class TextField extends JTextField {
 
     public TextField() {
-        this.setFont(FontLoader.roboto);
+        this.setFont(new Font("Roboto", Font.PLAIN, 15));
     }
 
 }

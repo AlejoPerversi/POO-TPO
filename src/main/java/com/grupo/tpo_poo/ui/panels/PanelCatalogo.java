@@ -25,8 +25,8 @@ public class PanelCatalogo extends JPanel implements ActionListener {
     Button buttonAdd;
     Button buttonRemove;
     Button buttonCatalogo;
-    JTable tableCatalogo;
     TableModelCatalogo modelCatalogo;
+    public static JTable tableCatalogo;
     
     public PanelCatalogo() {
         topPanel = new JPanel(new GridLayout(1, 2));
@@ -93,6 +93,15 @@ public class PanelCatalogo extends JPanel implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Un elemento con este id existe.", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
+            if (Config.clearFields.isSelected()) {
+                textCodigo.setText("");
+                textDescr.setText("");
+                textPrecioUnitario.setText("");
+                textStock.setText("");
+                textStockMin.setText("");
+            }
+
         }
 
         if (e.getSource() == buttonRemove) {

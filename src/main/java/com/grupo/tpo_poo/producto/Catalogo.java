@@ -1,7 +1,6 @@
 package com.grupo.tpo_poo.producto;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Catalogo {
     public static ArrayList<Producto> productos;

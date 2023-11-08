@@ -1,11 +1,10 @@
 package com.grupo.tpo_poo.ui;
 
 import javax.swing.JFrame;
-
 import com.grupo.tpo_poo.ui.input.MenuBar;
 
 public class Frame extends JFrame {
-    public static final int WIDTH = 750;
+    public static final int WIDTH = 770;
     public static final int HEIGHT = 600;
     public static TabbedPane tabbedPane;
     MenuBar menuBar;

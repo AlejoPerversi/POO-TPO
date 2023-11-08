@@ -14,11 +14,11 @@ public class TableModelVentas extends DefaultTableModel {
 
     public TableModelVentas(JTable table) {
         this.table = table;
-        this.addColumn("Id Venta");
+        this.addColumn("Id");
         this.addColumn("Producto");
         this.addColumn("Cantidad");
-        this.addColumn("Medio Pago");
-        this.addColumn("Monto Total");
+        this.addColumn("MedioPago");
+        this.addColumn("Total");
 
         this.addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent e) {

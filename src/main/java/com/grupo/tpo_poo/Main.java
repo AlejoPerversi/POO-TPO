@@ -2,19 +2,19 @@ package com.grupo.tpo_poo;
 
 import com.grupo.tpo_poo.ui.Frame;
 import com.grupo.tpo_poo.producto.Catalogo;
-import com.grupo.tpo_poo.util.FontLoader;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import com.grupo.tpo_poo.util.ShutdownHook;
+import com.formdev.flatlaf.intellijthemes.FlatDraculaIJTheme;
 
 public class Main { 
-    private static Frame frame;
+    public static Frame frame;
     public static Catalogo catalogo;
-    public static FontLoader fontLoader;
+    private static ShutdownHook shutdownHook;
 
     public static void main(String[] args) {
-        FlatAtomOneDarkIJTheme.setup();
+        FlatDraculaIJTheme.setup();
         frame = new Frame();
         catalogo = new Catalogo();
-        fontLoader = new FontLoader();
-
+        shutdownHook  = new ShutdownHook();
+        
     }
 }
