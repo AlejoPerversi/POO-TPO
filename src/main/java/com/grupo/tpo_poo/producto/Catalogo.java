@@ -31,7 +31,7 @@ public class Catalogo {
         }
         return new Producto(0, "", 0, 0, 0);
     }
-
+    
     public static ArrayList<String> formatoVenta() {
         ArrayList<String> productosVenta = new ArrayList<>();
         for (Producto p : productos) {
