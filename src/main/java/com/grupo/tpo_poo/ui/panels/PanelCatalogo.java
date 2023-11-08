@@ -39,13 +39,13 @@ public class PanelCatalogo extends JPanel implements ActionListener {
         labelCodigo = new Label("Código:");
         textCodigo = new TextField();
         labelDescr = new Label("Descripción:");
-        textDescr = new JTextField();
+        textDescr = new TextField();
         labelPrecioUnitario = new Label("Precio Unitario:");
-        textPrecioUnitario = new JTextField();
+        textPrecioUnitario = new TextField();
         labelStock = new Label("Stock:");
-        textStock = new JTextField();
+        textStock = new TextField();
         labelStockMin = new Label("Stock Min:");
-        textStockMin = new JTextField();
+        textStockMin = new TextField();
 
         topLeftPannel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         topRightPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));

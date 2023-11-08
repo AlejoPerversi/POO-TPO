@@ -1,6 +1,7 @@
 package com.grupo.tpo_poo.producto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Catalogo {
     public static ArrayList<Producto> productos;
@@ -20,7 +21,26 @@ public class Catalogo {
         return existe;
     }
 
+    public static Producto getProducto(int id) {
+        if (existeProducto(id)) {
+            for (Producto p : productos) {
+                if (p.getCodigo() == id) {
+                    return p;
+                }
+            }
+        }
+        return new Producto(0, "", 0, 0, 0);
+    }
 
+    public static ArrayList<String> formatoVenta() {
+        ArrayList<String> productosVenta = new ArrayList<>();
+        for (Producto p : productos) {
+            String info = Integer.toString(p.getCodigo()) + " " +  p.getDescr();
+            productosVenta.add(info);
+        }
+
+        return productosVenta;
+    }
 
     public static void imprimirCatalogo() {
         for (Producto p : productos) {
