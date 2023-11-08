@@ -1,6 +1,7 @@
 package com.grupo.tpo_poo.ui;
 
 import javax.swing.JTabbedPane;
+import java.awt.Font;
 import javax.swing.JPanel;
 import com.grupo.tpo_poo.ui.panels.PanelVentas;
 import com.grupo.tpo_poo.ui.panels.Config;
@@ -12,6 +13,7 @@ public class TabbedPane extends JTabbedPane {
     public Config config;
 
     public TabbedPane() {
+        this.setFont(new Font("Roboto", Font.PLAIN, 13));
         stock = new PanelCatalogo();
         sales = new PanelVentas();
         config = new Config();

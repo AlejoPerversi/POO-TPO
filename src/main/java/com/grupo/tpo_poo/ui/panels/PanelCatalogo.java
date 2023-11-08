@@ -6,6 +6,7 @@ import com.grupo.tpo_poo.producto.Producto;
 import com.grupo.tpo_poo.ui.components.*;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.awt.Font;
 
 public class PanelCatalogo extends JPanel implements ActionListener {
     Label labelCodigo;
@@ -14,10 +15,10 @@ public class PanelCatalogo extends JPanel implements ActionListener {
     Label labelStock;
     Label labelStockMin;
     TextField textCodigo;
-    JTextField textDescr;
-    JTextField textPrecioUnitario;
-    JTextField textStock;
-    JTextField textStockMin;
+    TextField textDescr;
+    TextField textPrecioUnitario;
+    TextField textStock;
+    TextField textStockMin;
     JPanel topPanel;
     JPanel topLeftPannel;
     JPanel topRightPanel;
@@ -73,6 +74,7 @@ public class PanelCatalogo extends JPanel implements ActionListener {
         topPanel.add(topRightPanel);
         
         tableCatalogo = new JTable();
+        tableCatalogo.setFont(new Font("Roboto", Font.PLAIN, 15));
         modelCatalogo = new TableModelCatalogo(tableCatalogo);
         tableCatalogo.setModel(modelCatalogo);
 

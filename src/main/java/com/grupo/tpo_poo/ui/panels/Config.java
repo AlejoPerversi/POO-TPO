@@ -2,7 +2,6 @@ package com.grupo.tpo_poo.ui.panels;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import com.grupo.tpo_poo.ui.components.CheckBox;

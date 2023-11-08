@@ -1,5 +1,6 @@
 package com.grupo.tpo_poo.ui.panels;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,14 +8,15 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import com.grupo.tpo_poo.ui.components.Button;
+import com.grupo.tpo_poo.ui.components.ComboBox;
 import com.grupo.tpo_poo.ui.components.Label;
 import com.grupo.tpo_poo.ui.components.TableModelVentas;
 import com.grupo.tpo_poo.ui.components.TextField;
+
 import com.grupo.tpo_poo.producto.Catalogo;
 
 public class PanelVentas extends JPanel implements ActionListener {
@@ -23,11 +25,11 @@ public class PanelVentas extends JPanel implements ActionListener {
     Label labelCantidad;
     Label labelMedioPago;
     TextField textCodigo;
-    JComboBox<String> comboBoxProducto;
+    ComboBox<String> comboBoxProducto;
     TextField textCantidad;
-    JComboBox<String> comboBoxMedioPago;
+    ComboBox<String> comboBoxMedioPago;
     Label labelCuotas;
-    JComboBox<Integer> comboBoxCuotas;
+    ComboBox<Integer> comboBoxCuotas;
     JPanel leftPanel;
     JPanel topLeftPannel;
     JPanel bottomLeftPanel;
@@ -48,7 +50,7 @@ public class PanelVentas extends JPanel implements ActionListener {
         labelCodigo = new Label("Id Venta:");
         textCodigo = new TextField();
         labelProducto = new Label("Producto:");
-        comboBoxProducto = new JComboBox<String>();
+        comboBoxProducto = new ComboBox<String>();
         comboBoxProducto.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -66,11 +68,11 @@ public class PanelVentas extends JPanel implements ActionListener {
         labelCantidad = new Label("Cantidad:");
         textCantidad = new TextField();
         labelMedioPago = new Label("Medio Pago:");
-        comboBoxMedioPago = new JComboBox<String>(new String[]{"Debito", "Credito", "Efectivo"});
+        comboBoxMedioPago = new ComboBox<String>(new String[]{"Debito", "Credito", "Efectivo"});
         comboBoxMedioPago.addActionListener(this);
 
         labelCuotas = new Label("Cuotas:");
-        comboBoxCuotas = new JComboBox<Integer>(new Integer[]{2, 3, 6});
+        comboBoxCuotas = new ComboBox<Integer>(new Integer[]{2, 3, 6});
         labelCuotas.setVisible(false);
         comboBoxCuotas.setVisible(false);
 
@@ -101,6 +103,7 @@ public class PanelVentas extends JPanel implements ActionListener {
         leftPanel.add(bottomLeftPanel);
 
         tableVentas = new JTable();
+        tableVentas.setFont(new Font("Roboto", Font.PLAIN, 15));
         modelVentas = new TableModelVentas(tableVentas);
         tableVentas.setModel(modelVentas);
 

@@ -7,8 +7,8 @@ import com.grupo.tpo_poo.ui.panels.PanelVentas;
 public class ShutdownHook {
 
     public ShutdownHook() {
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            this.onClose(); // Run your cleanup code here
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            this.onClose();
         }));
     }
 

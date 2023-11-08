@@ -13,7 +13,7 @@ public class Button extends JButton {
         this.setFocusable(false);
         this.setToolTipText(tooltip);
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        this.setFont(new Font("Roboto", Font.PLAIN, 15));
+        this.setFont(new Font("Roboto", Font.PLAIN, 13));
     }
 
 }

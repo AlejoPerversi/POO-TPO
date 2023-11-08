@@ -1,4 +1,4 @@
-package com.grupo.tpo_poo.ui.input;
+package com.grupo.tpo_poo.ui.components;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +16,6 @@ import com.grupo.tpo_poo.Main;
 
 
 public class MenuBar extends JMenuBar implements ActionListener{
-
     JMenu themeMenu;
     JMenu darkThemes;
     JMenu lightThemes;

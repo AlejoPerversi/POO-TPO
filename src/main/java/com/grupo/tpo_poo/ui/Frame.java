@@ -1,7 +1,7 @@
 package com.grupo.tpo_poo.ui;
 
 import javax.swing.JFrame;
-import com.grupo.tpo_poo.ui.input.MenuBar;
+import com.grupo.tpo_poo.ui.components.MenuBar;
 
 public class Frame extends JFrame {
     public static final int WIDTH = 770;
