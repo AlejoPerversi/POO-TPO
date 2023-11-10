@@ -1,10 +1,10 @@
-package com.grupo.tpo_poo.ui;
+package com.grupo.tpo_poo.ui.panels;
 
 import javax.swing.JTabbedPane;
+
+import com.grupo.tpo_poo.ui.Frame;
+
 import java.awt.Font;
-import com.grupo.tpo_poo.ui.panels.PanelVentas;
-import com.grupo.tpo_poo.ui.panels.Config;
-import com.grupo.tpo_poo.ui.panels.PanelCatalogo;
 
 public class TabbedPane extends JTabbedPane {
     public PanelCatalogo stock;

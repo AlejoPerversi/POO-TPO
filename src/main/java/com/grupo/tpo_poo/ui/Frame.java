@@ -2,6 +2,7 @@ package com.grupo.tpo_poo.ui;
 
 import javax.swing.JFrame; 
 import com.grupo.tpo_poo.ui.components.MenuBar;
+import com.grupo.tpo_poo.ui.panels.TabbedPane;
 
 public class Frame extends JFrame {
     public static final int WIDTH = 770;
