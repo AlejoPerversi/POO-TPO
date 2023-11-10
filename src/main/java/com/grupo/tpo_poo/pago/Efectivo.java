@@ -4,6 +4,7 @@ public class Efectivo extends Pago {
 
     public Efectivo(double monto) {
         super(monto);
+        this.metodo = "Efectivo";
     }
     
     public double calcularMonto() {

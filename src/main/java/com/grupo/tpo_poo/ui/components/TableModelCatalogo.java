@@ -20,8 +20,10 @@ public class TableModelCatalogo extends DefaultTableModel {
         this.addColumn("Price");
         this.addColumn("Stock");
         this.addColumn("Min Stock");
-        this.loadCSVData("catalogo.csv");
+        this.addColumn("Reponer");
 
+        this.loadCSVData("data/catalogo.csv");
+        
         this.addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent e) {
 
@@ -44,23 +46,24 @@ public class TableModelCatalogo extends DefaultTableModel {
 
                         switch (column) {
                             case 0: //Codigo
-                                producto.setCodigo(Integer.parseInt((String)cellValue));
+                                producto.setCodigo(Integer.parseInt(cellValue.toString()));
                                 break;
 
                             case 1: //Descr
-                                producto.setDescr((String)cellValue);
+                                producto.setDescr(cellValue.toString());
                                 break;
 
                             case 2: //PrecioUni
-                                producto.setPrecioUnitario(Double.parseDouble((String)cellValue));
+                                producto.setPrecioUnitario(Double.parseDouble(cellValue.toString()));
                                 break;
 
                             case 3: //Stock
-                                producto.setStock(Integer.parseInt((String)cellValue));
+                                producto.setStock(Integer.parseInt(cellValue.toString()));
+                                table.setValueAt(producto.getStock() <= producto.getStockMin(), row, 5);
                                 break;
 
                             case 4: //Stock Min
-                                producto.setStockMin(Integer.parseInt((String)cellValue));
+                                producto.setStockMin(Integer.parseInt(cellValue.toString()));
                                 break;
                         }
                         break;
@@ -69,10 +72,15 @@ public class TableModelCatalogo extends DefaultTableModel {
         });
     }
 
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return column != 0;
+    }
+
     public void loadCSVData(String csvFilePath) {
         DefaultTableModel tableModel = CSVHandler.deserializeFromCSV(csvFilePath);
         if (tableModel != null) {
-            setRowCount(0); // Clear existing data
+            setRowCount(0);
             for (int row = 0; row < tableModel.getRowCount(); row++) {
                 Vector<Object> rowData = new Vector<>();
                 for (int column = 0; column < tableModel.getColumnCount(); column++) {

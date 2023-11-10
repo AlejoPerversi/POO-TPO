@@ -1,37 +1,49 @@
 package com.grupo.tpo_poo.producto;
 
+import java.util.ArrayList;
+import com.grupo.tpo_poo.pago.Credito;
+import com.grupo.tpo_poo.pago.Debito;
+import com.grupo.tpo_poo.pago.Efectivo;
 import com.grupo.tpo_poo.pago.Pago;
 
 public class Venta {
     int idVenta;
-    int idProducto;
-    Pago medioPago;
+    String medio;
     Producto producto;
+    Pago medioPago;
     int cantidad;
-    double precioBase;
-    double montoTotal;
+    int cuotas;
+    double total;
 
-    public Venta(int idVenta, Producto producto, int cantidad, Pago medioPago) {
+    public Venta(int idVenta, Producto producto, int cantidad, String medio, int cuotas) {
         this.idVenta = idVenta;
         this.producto = producto;
         this.cantidad = cantidad;
-        this.medioPago = medioPago;
-        this.precioBase = producto.getPrecioUnitario() * cantidad;
-        this.idProducto = producto.getCodigo();
-        this.medioPago.setMonto(precioBase);
-        this.montoTotal = medioPago.calcularMonto();
+        this.cuotas = cuotas;
+
+        switch (medio) {
+            case "Efectivo":
+                medioPago = new Efectivo(producto.getPrecioUnitario() * cantidad);
+                break;
+
+            case "Debito":
+                medioPago = new Debito(producto.getPrecioUnitario() * cantidad);
+                break;
+
+            case "Credito":
+                medioPago = new Credito(producto.getPrecioUnitario() * cantidad, cuotas);
+                break;
+        }
+        System.out.println(medioPago.getMetodo());
+        this.total = medioPago.calcularMonto();
     }
 
     public int getIdVenta() {
         return idVenta;
     }
 
-    public Pago getMedioPago() {
-        return medioPago;
-    }
-
-    public void setMedioPago(Pago medioPago) {
-        this.medioPago = medioPago;
+    public String getMedioPago() {
+        return medioPago.getMetodo();
     }
 
     public Producto getProducto() {
@@ -42,6 +54,14 @@ public class Venta {
         this.producto = producto;
     }
 
+    public int getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(int cuotas) {
+        this.cuotas = cuotas;
+    }
+
     public int getCantidad() {
         return cantidad;
     }
@@ -50,22 +70,21 @@ public class Venta {
         this.cantidad = cantidad;
     }
 
-    public double getPrecioBase() {
-        return precioBase;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setPrecioBase(double precioBase) {
-        this.precioBase = precioBase;
-    }
+    public Object[] getVentaObject() {
+        ArrayList<Object> datosVenta = new ArrayList<>();
+        datosVenta.add(idVenta);
+        datosVenta.add(producto.getCodigo());
+        datosVenta.add(producto.getDescr());
+        datosVenta.add(cantidad);
+        datosVenta.add(medioPago.getMetodo());
+        datosVenta.add(cuotas);
+        datosVenta.add(total);
 
-    public double getMontoTotal() {
-        return montoTotal;
+        return datosVenta.toArray();
     }
-
-    public void setMontoTotal(double montoTotal) {
-        this.montoTotal = montoTotal;
-    }
-
-    
 
 }

@@ -2,7 +2,6 @@ package com.grupo.tpo_poo.ui;
 
 import javax.swing.JTabbedPane;
 import java.awt.Font;
-import javax.swing.JPanel;
 import com.grupo.tpo_poo.ui.panels.PanelVentas;
 import com.grupo.tpo_poo.ui.panels.Config;
 import com.grupo.tpo_poo.ui.panels.PanelCatalogo;
@@ -24,8 +23,5 @@ public class TabbedPane extends JTabbedPane {
         this.addTab("Config", null, config, "Cambiar configuraciones.");
     }
 
-    public void setTab(JPanel panel) {
-        this.setSelectedComponent(panel);
-    }
 
 }

@@ -67,6 +67,7 @@ public class Producto {
         datosProducto.add(precioUnitario);
         datosProducto.add(stock);
         datosProducto.add(stockMin);
+        datosProducto.add(this.getStock() <= this.getStockMin());
         return datosProducto.toArray();
     }
 

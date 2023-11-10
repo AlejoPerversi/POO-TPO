@@ -2,11 +2,17 @@ package com.grupo.tpo_poo.producto;
 
 import java.util.ArrayList;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import com.grupo.tpo_poo.ui.panels.PanelCatalogo;
+
 public class Catalogo {
     public static ArrayList<Producto> productos;
 
     public Catalogo() {
         productos = new ArrayList<Producto>();
+        Catalogo.populateCatalogoFromTable(PanelCatalogo.tableCatalogo);
     }
 
     public static boolean existeProducto(int id) {
@@ -55,6 +61,22 @@ public class Catalogo {
 
     public static void borrarProducto(int index) {
         productos.remove(index);
+    }
+
+        public static void populateCatalogoFromTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        productos.clear();
+
+        for (int row = 0; row < model.getRowCount(); row++) {
+            int codigo = Integer.parseInt(model.getValueAt(row, 0).toString());
+            String descr = model.getValueAt(row, 1).toString();
+            double precioUnitario = Double.parseDouble(model.getValueAt(row, 2).toString());
+            int stock = Integer.parseInt(model.getValueAt(row, 3).toString());
+            int stockMin = Integer.parseInt(model.getValueAt(row, 4).toString());
+
+            Producto producto = new Producto(codigo, descr, precioUnitario, stock, stockMin);
+            productos.add(producto);
+        }
     }
 
 }

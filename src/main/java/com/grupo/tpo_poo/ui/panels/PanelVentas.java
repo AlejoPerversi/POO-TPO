@@ -8,6 +8,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,8 +17,10 @@ import com.grupo.tpo_poo.ui.components.ComboBox;
 import com.grupo.tpo_poo.ui.components.Label;
 import com.grupo.tpo_poo.ui.components.TableModelVentas;
 import com.grupo.tpo_poo.ui.components.TextField;
-
 import com.grupo.tpo_poo.producto.Catalogo;
+import com.grupo.tpo_poo.producto.Producto;
+import com.grupo.tpo_poo.producto.Venta;
+import com.grupo.tpo_poo.producto.Ventas;
 
 public class PanelVentas extends JPanel implements ActionListener {
     Label labelCodigo;
@@ -36,9 +39,15 @@ public class PanelVentas extends JPanel implements ActionListener {
     JScrollPane scrollPane;
     Button buttonAdd;
     Button buttonRemove;
+    Button mostrarVentas;
     TableModelVentas modelVentas;
     public static JTable tableVentas;
     
+    private int getSubstringUpToFirstSpace(String descr) {
+        String[] parts = descr.split(" "); 
+        return Integer.parseInt(parts[0]);
+    }
+
     public PanelVentas() {
         this.setLayout(new GridLayout(1, 2));
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -52,6 +61,7 @@ public class PanelVentas extends JPanel implements ActionListener {
         labelProducto = new Label("Producto:");
         comboBoxProducto = new ComboBox<String>();
         comboBoxProducto.addFocusListener(new FocusListener() {
+
             @Override
             public void focusGained(FocusEvent e) {
                 ArrayList<String> items = Catalogo.formatoVenta();
@@ -89,12 +99,14 @@ public class PanelVentas extends JPanel implements ActionListener {
 
         buttonAdd = new Button("Agregar", "Agregar una venta.", this);
         buttonRemove = new Button("Eliminar", "Eliminar una venta.", this);
+        mostrarVentas = new Button("Mostrar", "m", this);
 
         buttonAdd.setMaximumSize(new java.awt.Dimension(20, 20));
         buttonRemove.setMaximumSize(new java.awt.Dimension(20, 20));
 
         bottomLeftPanel.add(buttonAdd);
         bottomLeftPanel.add(buttonRemove);
+        bottomLeftPanel.add(mostrarVentas);
 
         topLeftPannel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         bottomLeftPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -115,6 +127,7 @@ public class PanelVentas extends JPanel implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == comboBoxMedioPago) {
             if (comboBoxMedioPago.getSelectedItem() == "Credito") {
                 labelCuotas.setVisible(true);
@@ -122,7 +135,53 @@ public class PanelVentas extends JPanel implements ActionListener {
             } else {
                 labelCuotas.setVisible(false);
                 comboBoxCuotas.setVisible(false);
+            } 
+
+        }
+        
+        
+        if (e.getSource() == buttonAdd) {
+            Producto producto = Catalogo.getProducto(getSubstringUpToFirstSpace(comboBoxProducto.getSelectedItem().toString()));
+            Venta venta = null;
+
+            if (comboBoxMedioPago.getSelectedItem().toString() != "Credito") {
+                venta = new Venta(Integer.parseInt(textCodigo.getText()), producto, Integer.parseInt(textCantidad.getText()), comboBoxMedioPago.getSelectedItem().toString(), 0);
+                
+            } else {
+                venta = new Venta(Integer.parseInt(textCodigo.getText()), producto, Integer.parseInt(textCantidad.getText()), comboBoxMedioPago.getSelectedItem().toString(),(Integer)comboBoxCuotas.getSelectedItem());
             }
+
+            if (!Ventas.existeVenta(Integer.parseInt(textCodigo.getText()))) {
+                if (producto.getStock() > venta.getCantidad()) {
+                    modelVentas.addRow(venta.getVentaObject());
+                    Ventas.addVenta(venta);
+                    producto.setStock(producto.getStock() - venta.getCantidad());
+                    PanelCatalogo.tableCatalogo.setValueAt(producto.getStock(), Catalogo.productos.indexOf(producto), 3);
+                }
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Una venta con este id existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            if (Config.clearFields.isSelected()) {
+                textCodigo.setText("");
+                comboBoxProducto.setSelectedItem(null);
+                textCantidad.setText("");
+                comboBoxMedioPago.setSelectedItem(null);
+            }
+
+
+        }
+        
+        if (e.getSource() == mostrarVentas) {
+            Ventas.imprimirVentas();
+        }
+
+
+        if (e.getSource() == buttonRemove) {
+            int row = tableVentas.getSelectedRow();
+            Ventas.borrarVenta(row);
+            modelVentas.removeRow(row);
         }
 
     }

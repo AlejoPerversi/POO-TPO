@@ -6,6 +6,7 @@ public class Credito extends Pago {
 
     public Credito(double monto, int cuotas) {
         super(monto);
+        this.metodo = "Credito";
         this.cuotas = cuotas;
     }
     

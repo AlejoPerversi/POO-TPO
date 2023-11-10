@@ -6,7 +6,7 @@ import java.awt.Font;
 public class CheckBox extends JCheckBox {
     public CheckBox(String text) {
         super(text);
-        this.setFont(new Font("Roboto", Font.PLAIN, 15));
+        this.setFont(new Font("Roboto", Font.PLAIN, 20));
         this.setSelected(true);
     }
 }

@@ -4,7 +4,7 @@ public class Debito extends Pago {
 
     public Debito(double monto) {
         super(monto);
-
+        this.metodo = "Debito";
     }
     
 }

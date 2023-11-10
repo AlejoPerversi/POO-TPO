@@ -26,14 +26,13 @@ public class PanelCatalogo extends JPanel implements ActionListener {
     Button buttonAdd;
     Button buttonRemove;
     Button buttonCatalogo;
-    TableModelCatalogo modelCatalogo;
+    public static TableModelCatalogo modelCatalogo;
     public static JTable tableCatalogo;
     
     public PanelCatalogo() {
         topPanel = new JPanel(new GridLayout(1, 2));
         topLeftPannel = new JPanel(new GridLayout(5, 2, 0, 10));
         topRightPanel = new JPanel(new GridLayout(3, 1));
-
         this.setLayout(new GridLayout(2, 1));
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 

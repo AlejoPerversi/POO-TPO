@@ -15,8 +15,8 @@ public class ShutdownHook {
     public void onClose() {
         if (Config.guardarAlSalir.isSelected()) {
             System.out.println("Guardando datos...");
-            CSVHandler.exportToCSV(PanelCatalogo.tableCatalogo, "catalogo.csv");
-            CSVHandler.exportToCSV(PanelVentas.tableVentas, "ventas.csv");
+            CSVHandler.exportToCSV(PanelCatalogo.tableCatalogo, "data/catalogo.csv");
+            CSVHandler.exportToCSV(PanelVentas.tableVentas, "data/ventas.csv");
         }
     }
     

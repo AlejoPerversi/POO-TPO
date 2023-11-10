@@ -1,3 +1,5 @@
-Agregar productos de la tabla al catalogo
-Agregar funcionalidad de add venta 
+Stock min 
 
+
+
+Editar producto edita la venta (nombre etc) NO
