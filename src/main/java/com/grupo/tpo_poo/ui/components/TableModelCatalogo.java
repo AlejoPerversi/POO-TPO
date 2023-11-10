@@ -64,6 +64,7 @@ public class TableModelCatalogo extends DefaultTableModel {
 
                             case 4: //Stock Min
                                 producto.setStockMin(Integer.parseInt(cellValue.toString()));
+                                table.setValueAt(producto.getStock() <= producto.getStockMin(), row, 5);
                                 break;
                         }
                         break;
@@ -74,7 +75,7 @@ public class TableModelCatalogo extends DefaultTableModel {
 
     @Override
     public boolean isCellEditable(int row, int column) {
-        return column != 0;
+        return column != 0 && column != 5;
     }
 
     public void loadCSVData(String csvFilePath) {

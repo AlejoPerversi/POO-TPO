@@ -1,5 +1,0 @@
-Stock min 
-
-
-
-Editar producto edita la venta (nombre etc) NO
