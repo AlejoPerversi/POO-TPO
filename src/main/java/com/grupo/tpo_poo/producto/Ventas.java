@@ -49,6 +49,7 @@ public class Ventas {
         for (int row = 0; row < model.getRowCount(); row++) {
             int codigo = Integer.parseInt(model.getValueAt(row, 0).toString());
             int idProducto = Integer.parseInt(model.getValueAt(row, 1).toString());
+            String descr = model.getValueAt(row, 2).toString();
             int cantidad = Integer.parseInt(model.getValueAt(row, 3).toString());
             String medioPago = model.getValueAt(row, 4).toString();
             int cuotas = Integer.parseInt(model.getValueAt(row, 5).toString());

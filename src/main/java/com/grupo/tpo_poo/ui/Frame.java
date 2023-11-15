@@ -19,7 +19,6 @@ public class Frame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.setLocationRelativeTo(null);
-        this.setAlwaysOnTop(true);
         this.add(tabbedPane);
         this.setJMenuBar(menuBar);
         this.setVisible(true);

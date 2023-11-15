@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import com.grupo.tpo_poo.ui.components.Button;
 import com.grupo.tpo_poo.ui.components.ComboBox;
@@ -36,10 +37,11 @@ public class PanelVentas extends JPanel implements ActionListener {
     JPanel leftPanel;
     JPanel topLeftPannel;
     JPanel bottomLeftPanel;
+    JSplitPane splitPane; 
     JScrollPane scrollPane;
     Button buttonAdd;
     Button buttonRemove;
-    Button mostrarVentas;
+    Button limpiarVentas;
     TableModelVentas modelVentas;
     public static JTable tableVentas;
     
@@ -54,7 +56,7 @@ public class PanelVentas extends JPanel implements ActionListener {
 
         leftPanel = new JPanel(new GridLayout(2, 1));
         topLeftPannel = new JPanel(new GridLayout(5, 2, 0, 10));
-        bottomLeftPanel = new JPanel(new GridLayout(2, 2));
+        bottomLeftPanel = new JPanel(new GridLayout(3, 1));
 
         labelCodigo = new Label("Id Venta:");
         textCodigo = new TextField();
@@ -99,14 +101,14 @@ public class PanelVentas extends JPanel implements ActionListener {
 
         buttonAdd = new Button("Agregar", "Agregar una venta.", this);
         buttonRemove = new Button("Eliminar", "Eliminar una venta.", this);
-        mostrarVentas = new Button("Mostrar", "m", this);
+        limpiarVentas = new Button("Limpiar", "Limpiar el listado de ventas", this);
 
         buttonAdd.setMaximumSize(new java.awt.Dimension(20, 20));
         buttonRemove.setMaximumSize(new java.awt.Dimension(20, 20));
 
         bottomLeftPanel.add(buttonAdd);
         bottomLeftPanel.add(buttonRemove);
-        bottomLeftPanel.add(mostrarVentas);
+        bottomLeftPanel.add(limpiarVentas);
 
         topLeftPannel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         bottomLeftPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -121,8 +123,9 @@ public class PanelVentas extends JPanel implements ActionListener {
 
         scrollPane = new JScrollPane(tableVentas);
 
-        this.add(leftPanel);
-        this.add(scrollPane);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, scrollPane);
+
+        this.add(splitPane);
     }
 
 
@@ -138,7 +141,6 @@ public class PanelVentas extends JPanel implements ActionListener {
             } 
 
         }
-        
         
         if (e.getSource() == buttonAdd) {
             Producto producto = Catalogo.getProducto(getSubstringUpToFirstSpace(comboBoxProducto.getSelectedItem().toString()));
@@ -157,26 +159,31 @@ public class PanelVentas extends JPanel implements ActionListener {
                     Ventas.addVenta(venta);
                     producto.setStock(producto.getStock() - venta.getCantidad());
                     PanelCatalogo.tableCatalogo.setValueAt(producto.getStock(), Catalogo.productos.indexOf(producto), 3);
+
+                    if (Config.clearFields.isSelected()) {
+                        textCodigo.setText("");
+                        comboBoxProducto.setSelectedItem(null);
+                        textCantidad.setText("");
+                        comboBoxMedioPago.setSelectedItem(null);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Stock insuficiente.", "Error", JOptionPane.ERROR_MESSAGE);    
                 }
             
             } else {
                 JOptionPane.showMessageDialog(null, "Una venta con este id existe.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-            if (Config.clearFields.isSelected()) {
-                textCodigo.setText("");
-                comboBoxProducto.setSelectedItem(null);
-                textCantidad.setText("");
-                comboBoxMedioPago.setSelectedItem(null);
-            }
-
-
         }
         
-        if (e.getSource() == mostrarVentas) {
-            Ventas.imprimirVentas();
-        }
+        if (e.getSource() == limpiarVentas) {
+            for (int i = tableVentas.getRowCount()-1; i >= 0; i--) {
+                Ventas.borrarVenta(i);
+                modelVentas.removeRow(i);
+            }
 
+        }
 
         if (e.getSource() == buttonRemove) {
             int row = tableVentas.getSelectedRow();

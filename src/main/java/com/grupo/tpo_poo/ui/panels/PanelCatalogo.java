@@ -25,7 +25,6 @@ public class PanelCatalogo extends JPanel implements ActionListener {
     JScrollPane scrollPane;
     Button buttonAdd;
     Button buttonRemove;
-    Button buttonCatalogo;
     public static TableModelCatalogo modelCatalogo;
     public static JTable tableCatalogo;
     
@@ -61,13 +60,11 @@ public class PanelCatalogo extends JPanel implements ActionListener {
         topLeftPannel.add(labelStockMin);
         topLeftPannel.add(textStockMin);
 
-        buttonAdd = new Button("Add", "Agregar un elemento a la tabla", this);
-        buttonRemove = new Button("Remove", "Eliminar un elemento de la tabla", this);
-        buttonCatalogo = new Button("Mostrar Catalogo", "Ver el listado de items del catalogo", this);
+        buttonAdd = new Button("Agregar", "Agregar un elemento a la tabla", this);
+        buttonRemove = new Button("Eliminar", "Eliminar un elemento de la tabla", this);
 
         topRightPanel.add(buttonAdd);
         topRightPanel.add(buttonRemove);
-        topRightPanel.add(buttonCatalogo);
 
         topPanel.add(topLeftPannel);
         topPanel.add(topRightPanel);
@@ -109,10 +106,6 @@ public class PanelCatalogo extends JPanel implements ActionListener {
             int row = tableCatalogo.getSelectedRow();
             Catalogo.borrarProducto(row);
             modelCatalogo.removeRow(row);
-        }
-
-        if (e.getSource() == buttonCatalogo) {
-            Catalogo.imprimirCatalogo();
         }
 
     }

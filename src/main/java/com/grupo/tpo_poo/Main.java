@@ -18,6 +18,6 @@ public class Main {
         catalogo = new Catalogo();
         ventas = new Ventas();
         shutdownHook  = new ShutdownHook();
-        
+
     }
 }
